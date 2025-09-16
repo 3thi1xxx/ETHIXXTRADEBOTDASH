@@ -1,0 +1,5 @@
+{
+  "name": "Trading Bot GUI",
+  "description": "A dashboard to monitor and control a trading bot orchestrator. It displays balance, open positions, PnL, allows starting/stopping strategies, and shows a live log of process manager events.",
+  "requestFramePermissions": []
+}

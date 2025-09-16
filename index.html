@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EthixxTradeBot - Unified Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              background: '#0a0f1e',
+              foreground: '#e0e0e0',
+              card: '#101629',
+              'card-foreground': '#e0e0e0',
+              popover: '#101629',
+              'popover-foreground': '#e0e0e0',
+              primary: '#3b82f6', // Brighter blue
+              'primary-foreground': '#ffffff',
+              secondary: '#1c233a',
+              'secondary-foreground': '#e0e0e0',
+              muted: '#1c233a',
+              'muted-foreground': '#a0a0a0',
+              accent: '#364060',
+              'accent-foreground': '#f0f0f0',
+              destructive: '#ff5555',
+              'destructive-foreground': '#ffffff',
+              border: '#2a314e',
+              input: '#2a314e',
+              ring: '#3b82f6',
+              success: '#22c55e',
+              warning: '#f59e0b',
+              'accent-yellow': '#facc15',
+            },
+            keyframes: {
+              'pulse-bg': {
+                '0%, 100%': { backgroundColor: 'rgba(59, 130, 246, 0.2)' },
+                '50%': { backgroundColor: 'rgba(59, 130, 246, 0.4)' },
+              }
+            },
+            animation: {
+              'pulse-bg': 'pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/",
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "recharts": "https://aistudiocdn.com/recharts@^3.2.0",
+    "zustand": "https://aistudiocdn.com/zustand@^4.5.4",
+    "zustand/": "https://aistudiocdn.com/zustand@^4.5.4/",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.4.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-background text-foreground dark">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
