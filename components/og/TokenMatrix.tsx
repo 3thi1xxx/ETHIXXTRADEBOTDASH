@@ -5,6 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/Card';
 import { Badge } from './ui/Badge';
 import { cn } from '../../lib/utils';
 import { TokenDrawer } from './TokenDrawer';
+import { AreaChart, Area, ResponsiveContainer } from 'recharts';
+import { formatCurrency } from '../../lib/utils';
+
 
 const getBand = (score: number): 'bullish' | 'neutral' | 'bearish' => {
   if (score >= 70) return 'bullish';
@@ -12,34 +15,44 @@ const getBand = (score: number): 'bullish' | 'neutral' | 'bearish' => {
   return 'neutral';
 };
 
-interface TokenTileProps {
+interface TokenRowProps {
   ticker: string;
   token: TokenState;
   onClick: () => void;
 }
 
-const TokenTile: React.FC<TokenTileProps> = React.memo(({ ticker, token, onClick }) => {
+const TokenRow: React.FC<TokenRowProps> = React.memo(({ ticker, token, onClick }) => {
     const band = getBand(token.score);
-
     const bandClasses = {
-        bullish: 'bg-green-500/10 border-green-500/30 hover:bg-green-500/20',
-        neutral: 'bg-sky-500/10 border-sky-500/30 hover:bg-sky-500/20',
-        bearish: 'bg-red-500/10 border-red-500/30 hover:bg-red-500/20'
+        bullish: 'border-l-green-500/80',
+        neutral: 'border-l-sky-500/80',
+        bearish: 'border-l-red-500/80'
     };
 
     return (
         <div
             onClick={onClick}
             className={cn(
-                'relative p-1.5 rounded-md cursor-pointer transition-all duration-200 border text-center flex flex-col justify-center items-center aspect-square',
+                'grid grid-cols-12 items-center p-2 rounded-md cursor-pointer transition-colors duration-200 hover:bg-accent/50 border-l-4',
                 bandClasses[band]
             )}
         >
-            <div className="font-bold text-xs truncate text-foreground">{ticker}</div>
-            <div className="text-lg font-mono font-extrabold">{token.score}</div>
-            {token.tags?.includes('NEW') && (
-                <Badge variant="warning" className="absolute -top-1 -right-1 text-xs px-1 py-0">NEW</Badge>
-            )}
+            <div className="col-span-3 font-bold text-sm truncate text-foreground">{ticker}</div>
+            <div className="col-span-3 text-xs text-muted-foreground text-right">{formatCurrency(token.liq, 0)}</div>
+            <div className="col-span-3 h-8">
+                 <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={token.history} margin={{ top: 5, right: 5, bottom: 5, left: 5}}>
+                         <defs>
+                            <linearGradient id={`chartGrad-${band}`} x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="5%" stopColor={band === 'bullish' ? '#22c55e' : band === 'neutral' ? '#3b82f6' : '#ff5555'} stopOpacity={0.4}/>
+                                <stop offset="95%" stopColor={band === 'bullish' ? '#22c55e' : band === 'neutral' ? '#3b82f6' : '#ff5555'} stopOpacity={0}/>
+                            </linearGradient>
+                        </defs>
+                        <Area type="monotone" dataKey="score" stroke={band === 'bullish' ? '#22c55e' : band === 'neutral' ? '#3b82f6' : '#ff5555'} strokeWidth={2} fill={`url(#chartGrad-${band})`} />
+                    </AreaChart>
+                </ResponsiveContainer>
+            </div>
+            <div className="col-span-3 text-lg font-mono font-extrabold text-right">{token.score}</div>
         </div>
     );
 });
@@ -50,7 +63,7 @@ const TokenMatrix: React.FC = () => {
 
   const sortedTokens = useMemo(() => {
     return Array.from(tokens.entries())
-           .sort(([, a], [, b]) => b.updatedAt - a.updatedAt);
+           .sort(([, a], [, b]) => b.score - a.score);
   }, [tokens]);
 
   return (
@@ -61,10 +74,17 @@ const TokenMatrix: React.FC = () => {
             <span className="text-sm font-normal text-muted-foreground">{tokens.size} / 500 Slots</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-grow overflow-y-auto">
-        <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-14 2xl:grid-cols-16 gap-2">
+      <CardContent className="flex-grow overflow-y-auto pr-2">
+        <div className="space-y-1">
+          {/* Header */}
+           <div className="grid grid-cols-12 items-center px-2 py-1 text-xs text-muted-foreground font-semibold">
+                <div className="col-span-3">Asset</div>
+                <div className="col-span-3 text-right">Liquidity</div>
+                <div className="col-span-3 text-center">Trend</div>
+                <div className="col-span-3 text-right">Score</div>
+            </div>
           {sortedTokens.map(([ticker, token]) => (
-            <TokenTile
+            <TokenRow
               key={ticker}
               ticker={ticker}
               token={token}

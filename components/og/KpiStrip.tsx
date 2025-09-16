@@ -3,8 +3,8 @@ import { useKpi } from '../../store/useOG';
 import { formatCurrency, formatNumber, formatUptime } from '../../lib/utils';
 
 const KpiCard: React.FC<{ title: string; value: React.ReactNode; subvalue?: React.ReactNode }> = ({ title, value, subvalue }) => (
-  <div className="p-3 text-center bg-card rounded-lg">
-    <h4 className="text-xs text-muted-foreground uppercase tracking-wider">{title}</h4>
+  <div className="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+    <h4 className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">{title}</h4>
     <p className="text-xl lg:text-2xl font-bold text-foreground mt-1">{value}</p>
     {subvalue && <p className="text-xs text-muted-foreground">{subvalue}</p>}
   </div>
@@ -17,11 +17,11 @@ const KpiStrip: React.FC = () => {
   const totalPnl = kpi ? kpi.portfolio + kpi.pnl : null;
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
       <KpiCard title="Portfolio Value" value={formatCurrency(totalPnl)} subvalue={`Total PNL (${formatCurrency(kpi?.pnl, 2)})`} />
       <KpiCard 
         title="Daily PnL" 
-        value={<span className={pnlPercent >= 0 ? 'text-success' : 'text-destructive'}>+{pnlPercent.toFixed(1)}%</span>} 
+        value={<span className={pnlPercent >= 0 ? 'text-success' : 'text-destructive'}>{(pnlPercent >= 0 ? '+' : '')}{pnlPercent.toFixed(1)}%</span>} 
         subvalue={<span className={pnlPercent >= 0 ? 'text-success' : 'text-destructive'}>{formatCurrency(kpi?.pnl)}</span>}
       />
       <KpiCard title="Auckland Edge" value={kpi ? `${kpi.edgeMs}ms` : '--'} />

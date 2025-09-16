@@ -6,20 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EthixxTradeBot - Unified Intelligence</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --background-start-rgb: 10, 15, 30;
+        --background-end-rgb: 22, 30, 53;
+        --card-rgb: 16, 22, 41;
+        --card-border-rgb: 38, 46, 73;
+        --primary-glow-rgb: 59, 130, 246;
+      }
+    </style>
     <script>
       tailwind.config = {
         darkMode: 'class',
         theme: {
           extend: {
             colors: {
-              background: '#0a0f1e',
+              background: 'rgb(var(--background-end-rgb))',
               foreground: '#e0e0e0',
-              card: '#101629',
+              card: 'rgb(var(--card-rgb) / 0.8)',
               'card-foreground': '#e0e0e0',
-              popover: '#101629',
+              popover: 'rgb(var(--card-rgb))',
               'popover-foreground': '#e0e0e0',
-              primary: '#3b82f6', // Brighter blue
-              'primary-foreground': '#ffffff',
+              primary: {
+                DEFAULT: '#3b82f6',
+                foreground: '#ffffff',
+                glow: 'rgba(var(--primary-glow-rgb), 0.3)',
+              },
               secondary: '#1c233a',
               'secondary-foreground': '#e0e0e0',
               muted: '#1c233a',
@@ -28,21 +40,35 @@
               'accent-foreground': '#f0f0f0',
               destructive: '#ff5555',
               'destructive-foreground': '#ffffff',
-              border: '#2a314e',
+              border: 'rgb(var(--card-border-rgb))',
               input: '#2a314e',
               ring: '#3b82f6',
               success: '#22c55e',
               warning: '#f59e0b',
               'accent-yellow': '#facc15',
             },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(circle at top left, rgb(var(--background-start-rgb)), transparent 80%)',
+              'card-glow': 'radial-gradient(circle at 50% -50%, var(--tw-gradient-stops))',
+            },
+            boxShadow: {
+                'primary-glow': '0 0 25px 0 rgba(var(--primary-glow-rgb), 0.3)',
+                'card-hover': '0 0 30px -5px rgba(var(--primary-glow-rgb), 0.2)',
+            },
             keyframes: {
-              'pulse-bg': {
-                '0%, 100%': { backgroundColor: 'rgba(59, 130, 246, 0.2)' },
-                '50%': { backgroundColor: 'rgba(59, 130, 246, 0.4)' },
+              'fade-in-up': {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'background-pan': {
+                '0%': { 'background-position': '0% 50%' },
+                '50%': { 'background-position': '100% 50%' },
+                '100%': { 'background-position': '0% 50%' },
               }
             },
             animation: {
-              'pulse-bg': 'pulse-bg 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+              'background-pan': 'background-pan 15s ease infinite',
             }
           }
         }
@@ -64,6 +90,7 @@
 </script>
 </head>
   <body class="bg-background text-foreground dark">
+    <div class="fixed inset-0 z-[-1] bg-gradient-radial from-[rgb(var(--background-start-rgb))] to-background"></div>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>
