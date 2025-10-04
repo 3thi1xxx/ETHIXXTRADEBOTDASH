@@ -9,8 +9,10 @@ class Hub {
   private eventSource: EventSource | null = null;
   private subscribers: Set<Subscriber> = new Set();
   private statusCallback: StatusCallback | null = null;
-  private reconnectTimeout: NodeJS.Timeout | null = null;
-  private mockInterval: NodeJS.Timeout | null = null;
+  // FIX: In a browser environment, setTimeout returns a number, not a NodeJS.Timeout.
+  private reconnectTimeout: number | null = null;
+  // FIX: In a browser environment, setInterval returns a number, not a NodeJS.Timeout.
+  private mockInterval: number | null = null;
 
   start(statusCallback: StatusCallback) {
     this.statusCallback = statusCallback;

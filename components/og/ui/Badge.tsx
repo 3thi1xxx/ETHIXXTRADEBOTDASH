@@ -5,7 +5,8 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'success' | 'destructive' | 'warning' | 'bullish' | 'neutral' | 'bearish';
 }
 
-function Badge({ className, variant = 'default', ...props }: BadgeProps) {
+// FIX: Changed to a const typed with React.FC to ensure proper prop type inference, including 'className'.
+const Badge: React.FC<BadgeProps> = ({ className, variant = 'default', ...props }) => {
   const variants = {
     default: 'border-transparent bg-primary text-primary-foreground',
     success: 'border-transparent bg-success text-white',

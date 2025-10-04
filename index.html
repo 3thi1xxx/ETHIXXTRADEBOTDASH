@@ -84,14 +84,25 @@
     "zustand": "https://aistudiocdn.com/zustand@^4.5.4",
     "zustand/": "https://aistudiocdn.com/zustand@^4.5.4/",
     "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
-    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.4.0"
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.4.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^0.15.0"
   }
 }
 </script>
 </head>
   <body class="bg-background text-foreground dark">
     <div class="fixed inset-0 z-[-1] bg-gradient-radial from-[rgb(var(--background-start-rgb))] to-background"></div>
-    <div id="root"></div>
+    <div id="root">
+      <noscript>
+        <div style="background-color: rgb(22, 30, 53); color: #e0e0e0; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
+          <div style="border: 1px solid rgb(38, 46, 73); background-color: rgb(16, 22, 41); padding: 2rem 4rem; border-radius: 0.75rem; max-width: 600px; box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.2);">
+            <h1 style="font-size: 1.5rem; font-weight: bold; color: #3b82f6; margin-bottom: 1rem;">EthixxTradeBot - Unified Intelligence</h1>
+            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">This application requires JavaScript to function.</p>
+            <p style="font-size: 0.9rem; color: #a0a0a0;">Please enable JavaScript in your browser settings and refresh the page to access the dashboard.</p>
+          </div>
+        </div>
+      </noscript>
+    </div>
     <script type="module" src="/index.tsx"></script>
   </body>
 </html>
