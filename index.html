@@ -93,15 +93,189 @@
   <body class="bg-background text-foreground dark">
     <div class="fixed inset-0 z-[-1] bg-gradient-radial from-[rgb(var(--background-start-rgb))] to-background"></div>
     <div id="root">
-      <noscript>
-        <div style="background-color: rgb(22, 30, 53); color: #e0e0e0; font-family: sans-serif; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 2rem;">
-          <div style="border: 1px solid rgb(38, 46, 73); background-color: rgb(16, 22, 41); padding: 2rem 4rem; border-radius: 0.75rem; max-width: 600px; box-shadow: 0 0 30px -5px rgba(59, 130, 246, 0.2);">
-            <h1 style="font-size: 1.5rem; font-weight: bold; color: #3b82f6; margin-bottom: 1rem;">EthixxTradeBot - Unified Intelligence</h1>
-            <p style="font-size: 1.1rem; margin-bottom: 1.5rem;">This application requires JavaScript to function.</p>
-            <p style="font-size: 0.9rem; color: #a0a0a0;">Please enable JavaScript in your browser settings and refresh the page to access the dashboard.</p>
+      <div class="flex h-screen bg-background text-foreground font-sans">
+        <aside class="w-64 bg-card p-4 flex flex-col border-r border-border">
+          <div class="flex items-center mb-8 pl-2">
+            <div class="w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold text-xl text-primary">E</div>
+            <h1 class="text-xl font-bold ml-3">EthixxTradeBot</h1>
           </div>
-        </div>
-      </noscript>
+          <nav class="flex flex-col space-y-2">
+            <button class="flex items-center px-4 py-3 rounded-md text-sm font-medium transition-colors duration-200 bg-primary text-primary-foreground">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+              </svg>
+              <span>Unified Dashboard</span>
+            </button>
+            <button class="flex items-center px-4 py-3 rounded-md text-sm font-medium transition-colors duration-200 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H3V9h2a4 4 0 004-4V3l7 7-7 7z"></path>
+              </svg>
+              <span>Dashboard (Legacy)</span>
+            </button>
+            <button class="flex items-center px-4 py-3 rounded-md text-sm font-medium transition-colors duration-200 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.218 10.395L12.001 2l-5.217 8.395-8.782 1.277L6.39 17.929l-1.486 8.746L12.001 22l7.1-4.325-1.486-8.746 6.39-6.257-8.782-1.277z"></path>
+              </svg>
+              <span>Strategies</span>
+            </button>
+            <button class="flex items-center px-4 py-3 rounded-md text-sm font-medium transition-colors duration-200 text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+              <svg class="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+              </svg>
+              <span>Logs (Legacy)</span>
+            </button>
+          </nav>
+          <div class="mt-auto text-center text-muted-foreground text-xs">
+            <p>Orchestrator v2.0.0</p>
+            <p>&copy; 2024 Ethixx</p>
+          </div>
+        </aside>
+        <main class="flex-1 flex flex-col overflow-hidden">
+          <div class="flex flex-col h-full bg-background text-foreground">
+            <header class="flex-shrink-0 flex items-center justify-between p-4 border-b border-border bg-card">
+              <h1 class="text-lg font-bold text-foreground">EthixxTradeBot — <span class="text-primary">Unified Intelligence</span></h1>
+              <div class="flex items-center gap-4">
+                <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 bg-sky-500 text-white animate-pulse">CONNECTING...</div>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 bg-green-600 hover:bg-green-700 text-white">START</button>
+                <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2">STOP</button>
+              </div>
+            </header>
+            <div class="flex-grow p-4 lg:p-6 overflow-y-auto space-y-6">
+              <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Portfolio Value</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">$101,250.55</p>
+                  <p class="text-xs text-muted-foreground">Total PNL ($1,250.55)</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Daily PnL</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1"><span class="text-success">+1.3%</span></p>
+                  <p class="text-xs text-muted-foreground"><span class="text-success">$1,250.55</span></p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Auckland Edge</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">8ms</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Live Tokens</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">488</p>
+                  <p class="text-xs text-muted-foreground">/ 500</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Strategies</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">8 / 12</p>
+                  <p class="text-xs text-muted-foreground">enabled</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">CU Usage</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">0.8M</p>
+                  <p class="text-xs text-muted-foreground">78.0% used</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Opportunities</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">0</p>
+                  <p class="text-xs text-muted-foreground">active alerts</p>
+                </div>
+                <div class="p-3 text-center bg-card/50 rounded-lg transition-all duration-200 hover:bg-card/80 hover:scale-105">
+                  <h4 class="text-xs text-muted-foreground uppercase tracking-wider font-semibold">System Uptime</h4>
+                  <p class="text-xl lg:text-2xl font-bold text-foreground mt-1">48:00:00</p>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-[calc(100%-110px)]">
+                <div class="lg:col-span-3 flex flex-col gap-6">
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6">
+                      <h3 class="text-lg font-semibold leading-none tracking-tight">System Controls</h3>
+                    </div>
+                    <div class="p-4 sm:p-6 pt-0 space-y-4">
+                      <div class="flex items-center justify-between">
+                        <label for="autoscroll-cb" class="text-sm font-medium">Autoscroll Feed</label>
+                        <input type="checkbox" id="autoscroll-cb" class="h-4 w-4 shrink-0 rounded-sm border border-primary ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 accent-primary" checked>
+                      </div>
+                      <div class="space-y-2">
+                        <label for="risk-slider" class="text-sm font-medium">Risk Appetite</label>
+                        <input type="range" id="risk-slider" value="50" class="w-full h-2 bg-secondary rounded-lg appearance-none cursor-pointer accent-primary">
+                      </div>
+                      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-destructive text-destructive-foreground hover:bg-destructive/90 h-10 px-4 py-2 w-full">Emergency Stop All</button>
+                    </div>
+                  </div>
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6"><h3 class="text-lg font-semibold leading-none tracking-tight">Tiip Ttaag Analytics</h3></div>
+                    <div class="p-4 sm:p-6 pt-0 space-y-6"><div class="flex justify-around text-center"><div><div class="relative w-24 h-24 inline-flex items-center justify-center"><svg class="w-full h-full" viewBox="0 0 100 100"><circle class="stroke-secondary" stroke-width="8" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50"></circle><circle class="stroke-accent-yellow" stroke-width="8" stroke-dasharray="289.02652413026095" stroke-dashoffset="92.4884877216835" stroke-linecap="round" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50" style="transform: rotate(-90deg); transform-origin: 50% 50%;"></circle></svg><span class="absolute text-xl font-bold">68%</span></div><p class="text-sm mt-2">Volatility</p></div><div><div class="relative w-24 h-24 inline-flex items-center justify-center"><svg class="w-full h-full" viewBox="0 0 100 100"><circle class="stroke-secondary" stroke-width="8" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50"></circle><circle class="stroke-primary" stroke-width="8" stroke-dasharray="289.02652413026095" stroke-dashoffset="43.35397861953914" stroke-linecap="round" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50" style="transform: rotate(-90deg); transform-origin: 50% 50%;"></circle></svg><span class="absolute text-xl font-bold">85%</span></div><p class="text-sm mt-2">Liquidity Pool</p></div><div><div class="relative w-24 h-24 inline-flex items-center justify-center"><svg class="w-full h-full" viewBox="0 0 100 100"><circle class="stroke-secondary" stroke-width="8" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50"></circle><circle class="stroke-success" stroke-width="8" stroke-dasharray="289.02652413026095" stroke-dashoffset="158.96458827164352" stroke-linecap="round" stroke="currentColor" fill="transparent" r="46" cx="50" cy="50" style="transform: rotate(-90deg); transform-origin: 50% 50%;"></circle></svg><span class="absolute text-xl font-bold">45%</span></div><p class="text-sm mt-2">Price Stability</p></div></div><div class="bg-secondary p-4 rounded-lg space-y-3"><h4 class="font-semibold text-sm">High Momentum Spike</h4><p class="text-xs text-muted-foreground">SOL/USDC threaxing umusual volume</p><div class="flex gap-2"><button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground h-9 px-3 flex-1 text-xs">Simulate</button><button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 flex-1 text-xs">Execute</button></div></div><div class="flex justify-around"><button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3">Top Gainers</button><button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3">New Pairs</button><button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-3">Backtest</button></div></div>
+                  </div>
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6"><h3 class="text-lg font-semibold leading-none tracking-tight">Risk Cockpit</h3><p class="text-sm text-muted-foreground">Live risk assessment</p></div>
+                    <div class="p-4 sm:p-6 pt-0 space-y-4"><div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium">Market Exposure</span><div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-warning text-black">MED</div></div><div class="relative h-2 w-full overflow-hidden rounded-full bg-secondary"><div class="h-full w-full flex-1 bg-primary transition-all" style="transform: translateX(-35%);"></div></div></div><div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium">Concentration</span><div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-destructive text-destructive-foreground">HIGH</div></div><div class="relative h-2 w-full overflow-hidden rounded-full bg-secondary"><div class="h-full w-full flex-1 bg-primary transition-all" style="transform: translateX(-20%);"></div></div></div><div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium">Volatility Drift</span><div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-success text-white">LOW</div></div><div class="relative h-2 w-full overflow-hidden rounded-full bg-secondary"><div class="h-full w-full flex-1 bg-primary transition-all" style="transform: translateX(-70%);"></div></div></div></div>
+                  </div>
+                </div>
+                <div class="lg:col-span-6 flex flex-col">
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover h-full flex flex-col">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6"><h3 class="text-lg font-semibold leading-none tracking-tight">Performance Charts</h3></div>
+                    <div class="p-4 sm:p-6 pt-0 flex-grow grid grid-rows-2 gap-6"><div class="row-span-1"><h3 class="text-sm font-semibold mb-2 px-1">Historical Performance</h3><div class="recharts-responsive-container" style="width: 100%; height: 90%;"><div style="position: absolute; width: 0px; height: 0px; visibility: hidden; display: none;"></div></div></div><div class="row-span-1"><h3 class="text-sm font-semibold mb-2 px-1">Profit/Loss Distribution</h3><div class="recharts-responsive-container" style="width: 100%; height: 90%;"><div style="position: absolute; width: 0px; height: 0px; visibility: hidden; display: none;"></div></div></div></div>
+                  </div>
+                </div>
+                <div class="lg:col-span-3 flex flex-col gap-6 min-h-0">
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover flex-1 flex flex-col min-h-0">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6"><h3 class="text-lg font-semibold leading-none tracking-tight">AI Council Decisions</h3></div>
+                    <div class="p-4 sm:p-6 pt-0 flex-grow overflow-y-auto pr-2">
+                      <div class="space-y-3">
+                        <div class="p-3 bg-secondary rounded-md space-y-3">
+                          <div class="flex justify-between items-start">
+                            <div>
+                              <h4 class="font-semibold text-sm">Increase SOL/USDC Long Exposure</h4>
+                              <p class="text-xs text-muted-foreground">High momentum detected. Proposing to increase position size by 20%.</p>
+                            </div>
+                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-warning text-black">Voting</div>
+                          </div>
+                          <div class="flex flex-wrap gap-2">
+                            <div class="flex items-center gap-1.5 bg-accent/50 p-1 rounded-md text-xs"><span class="font-bold text-success">YES</span><span class="text-muted-foreground">VOLATILITY</span><span class="font-mono text-foreground">92%</span><button title="Get reasoning" class="ml-1 text-muted-foreground/60 hover:text-foreground transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></button></div>
+                            <div class="flex items-center gap-1.5 bg-accent/50 p-1 rounded-md text-xs"><span class="font-bold text-success">YES</span><span class="text-muted-foreground">SENTIMENT</span><span class="font-mono text-foreground">85%</span><button title="Get reasoning" class="ml-1 text-muted-foreground/60 hover:text-foreground transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></button></div>
+                            <div class="flex items-center gap-1.5 bg-accent/50 p-1 rounded-md text-xs"><span class="font-bold text-destructive">NO</span><span class="text-muted-foreground">RISK</span><span class="font-mono text-foreground">60%</span><button title="Get reasoning" class="ml-1 text-muted-foreground/60 hover:text-foreground transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></button></div>
+                          </div>
+                          <div>
+                            <div class="relative h-1.5 w-full overflow-hidden rounded-full bg-secondary"><div class="h-full w-full flex-1 bg-primary transition-all" style="transform: translateX(-33.33333333333333%);"></div></div>
+                            <div class="flex justify-between items-center text-xs mt-1 text-muted-foreground"><span>2 FOR / 1 AGAINST</span><span class="font-mono">01:59</span></div>
+                          </div>
+                          <div class="flex gap-2">
+                            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground h-9 px-3 flex-1 text-xs">Evidence</button>
+                            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 flex-1 text-xs bg-success/80 hover:bg-success">Vote FOR</button>
+                          </div>
+                        </div>
+                        <div class="p-3 bg-secondary rounded-md space-y-3">
+                          <div class="flex justify-between items-start">
+                            <div>
+                              <h4 class="font-semibold text-sm">Hedge ETH with Short Position</h4>
+                              <p class="text-xs text-muted-foreground">Negative funding rate and bearish divergence suggest downside risk.</p>
+                            </div>
+                            <div class="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-success text-white">Passed</div>
+                          </div>
+                          <div class="flex flex-wrap gap-2">
+                          <div class="flex items-center gap-1.5 bg-accent/50 p-1 rounded-md text-xs"><span class="font-bold text-success">YES</span><span class="text-muted-foreground">TECHNICAL</span><span class="font-mono text-foreground">95%</span><button title="Get reasoning" class="ml-1 text-muted-foreground/60 hover:text-foreground transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></button></div>
+                          <div class="flex items-center gap-1.5 bg-accent/50 p-1 rounded-md text-xs"><span class="font-bold text-success">YES</span><span class="text-muted-foreground">RISK</span><span class="font-mono text-foreground">88%</span><button title="Get reasoning" class="ml-1 text-muted-foreground/60 hover:text-foreground transition-colors"><svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg></button></div>
+                          </div>
+                          <div class="flex gap-2">
+                            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-transparent hover:bg-accent hover:text-accent-foreground h-9 px-3 flex-1 text-xs">Evidence</button>
+                            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-3 flex-1 text-xs" disabled>Vote FOR</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rounded-xl border border-border bg-card/60 backdrop-blur-sm shadow-lg transition-all duration-300 hover:border-primary/50 hover:shadow-card-hover flex-1 flex flex-col min-h-0">
+                    <div class="flex flex-col space-y-1.5 p-4 sm:p-6"><h3 class="text-lg font-semibold leading-none tracking-tight">Live Activity Feed</h3></div>
+                    <div class="p-4 sm:p-6 pt-0 flex-grow overflow-y-auto font-mono text-xs pr-2">
+                      <div class="space-y-1">
+                          <div class="flex animate-fade-in-up"><span class="text-muted-foreground/50 mr-2">12:00:00 AM</span><span class="font-bold mr-2 text-sky-400">INFO </span><span class="flex-1">OG Engine Initialized. Connecting to event stream.</span></div>
+                          <div class="flex animate-fade-in-up"><span class="text-muted-foreground/50 mr-2">12:00:01 AM</span><span class="font-bold mr-2 text-sky-400">INFO </span><span class="flex-1">Connection established. Awaiting market data...</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
     <script type="module" src="/index.tsx"></script>
   </body>

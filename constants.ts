@@ -1,6 +1,6 @@
 import { ViewType, Strategy } from './types';
 
-export const API_BASE_URL = 'http://localhost:7071';
+export const API_BASE_URL = 'https://gui-adapter-760033959405.us-west1.run.app';
 export const PROCESS_STATS_ENDPOINT = `${API_BASE_URL}/process-stats`;
 export const EXEC_ENDPOINT = `${API_BASE_URL}/exec`;
 export const EVENTS_ENDPOINT = `${API_BASE_URL}/events`;
